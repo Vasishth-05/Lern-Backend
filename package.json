@@ -1,0 +1,26 @@
+{
+  "name": "learn-backend",
+  "version": "1.0.0",
+  "description": "Backend Learning",
+  "keywords": [
+    "js",
+    "BE",
+    "and",
+    "gurumaharaj"
+  ],
+  "homepage": "https://github.com/Vasishth-05/Lern-Backend#readme",
+  "bugs": {
+    "url": "https://github.com/Vasishth-05/Lern-Backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vasishth-05/Lern-Backend.git"
+  },
+  "license": "ISC",
+  "author": "Vasishth Titarmare",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
