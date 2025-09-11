@@ -5,7 +5,17 @@ dotenv.config({
     path: './env'
 });
 
-connectDB();
+const orPORT = process.env.PORT || 4000
+
+connectDB()
+    .then(()=>{
+        app.listen(orPORT, ()=>{
+            console.log(`Server is running on ${orPORT}`); 
+        })
+    })
+    .catch((err)=>{
+        console.log("mongoDB connection failed !!", err);
+    })
 
 
 
