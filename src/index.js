@@ -9,7 +9,7 @@ const orPORT = process.env.PORT || 4000
 
 connectDB()
     .then(()=>{
-        app.listen(orPORT, ()=>{
+        app.listen(orPORT, () => {
             console.log(`Server is running on ${orPORT}`); 
         })
     })
