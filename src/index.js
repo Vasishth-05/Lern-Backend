@@ -1,10 +1,11 @@
+
 import { app } from "./app.js";
 
 import dotenv from "dotenv";
-import {connectDB} from "./db/connect.db.js"
+import connectDB from "./db/connect.db.js"
 
 dotenv.config({
-    path: './env'
+    path: './.env'
 });
 
 const orPORT = process.env.PORT || 4000
@@ -12,11 +13,11 @@ const orPORT = process.env.PORT || 4000
 connectDB()
     .then(()=>{
         app.listen(orPORT, () => {
-            console.log(`Server is running on ${orPORT}`); 
+            console.log(`Server is running on http://localhost:${orPORT}`); 
         })
     })
-    .catch((err)=>{
-        console.log("mongoDB connection failed !!", err);
+    .catch((error)=>{
+        console.log("mongoDB connection failed !!", error);
     })
 
 
