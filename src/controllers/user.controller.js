@@ -24,7 +24,7 @@ const registerUser = asyncHandler( async (req,res) => {
     //     throw new ApiError(400, "fullname is required")
     // }
 
-    // but in single line more refined one we can do is by using (some) method 
+    // but in single line more refined one we can do is by using (some) method
     if (
         [fullname,username,email,password].some((field) => field?.trim() == "")
     ) {
