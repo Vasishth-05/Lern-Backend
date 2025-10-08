@@ -4,6 +4,7 @@ import { ApiError } from "../utils/apiError.utils.js";
 import {User} from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.utils.js";
 import { ApiResponse } from "../utils/apiResponse.utils.js";
+import bcrypt from "bcrypt";
 
 const registerUser = asyncHandler( async (req,res) => {
     // get user details from frontend
@@ -17,7 +18,6 @@ const registerUser = asyncHandler( async (req,res) => {
     // return response
 
     const { fullname, username, email, password } = req.body
-    console.log(req.body    );
 
     // can check everything by repeating if statement multiple times
     // if (fullname == "") {
@@ -86,4 +86,38 @@ const registerUser = asyncHandler( async (req,res) => {
 
 })
 
-export {registerUser}
+const loginUser = asyncHandler(async (req,res) => {
+    // get username or email and password from the user
+    //check whether the user already exists or not, if not an user send an error "please signup"
+    //check the password if wronf send "your password is incorrect"
+    //if password check generate accessToken and refreshToken and send it to the user
+    // then send cookies
+    //find the user from the userModel
+    //send a response "user is logedIn"
+
+    const {username,email,password} = req.body;
+
+    if (!username || !email) {
+        throw new ApiError(400, "One fields is required")
+    }
+
+    const user = await User.findOne({
+        $or : [{username},{email}]
+    })
+
+    if(!user){
+        throw new ApiError(404,"You are not a user, kindly signup");
+    }
+
+    const isPasswordValid = await user.isPasswordCorrect(password);
+
+    if(!isPasswordValid){
+        throw new ApiError(401,"You're password is incorrect'");
+    }
+
+})
+
+export {
+    registerUser,
+    loginUser
+}
