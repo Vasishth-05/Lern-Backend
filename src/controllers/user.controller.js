@@ -114,7 +114,6 @@ const loginUser = asyncHandler(async (req,res) => {
     if(!isPasswordValid){
         throw new ApiError(401,"You're password is incorrect'");
     }
-
 })
 
 export {
