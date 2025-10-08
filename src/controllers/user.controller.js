@@ -17,7 +17,7 @@ const registerUser = asyncHandler( async (req,res) => {
     // return response
 
     const { fullname, username, email, password } = req.body
-    console.log("email : " , email);
+    console.log(req.body    );
 
     // can check everything by repeating if statement multiple times
     // if (fullname == "") {
@@ -34,6 +34,7 @@ const registerUser = asyncHandler( async (req,res) => {
     const existedUser = await User.findOne({
         $or:[{username},{email}]
     })
+    
 
     if(existedUser){
         throw new ApiError(409, "user with email or username already exists")
@@ -41,6 +42,7 @@ const registerUser = asyncHandler( async (req,res) => {
 
     const avatarLocalPath = req.files?.avatar[0]?.path;
     //const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    
     
     let coverImageLocalPath;
 
@@ -54,7 +56,7 @@ const registerUser = asyncHandler( async (req,res) => {
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-
+    
     if (!avatar) {
         throw new ApiError(400, "Avatar file is required")
     }
@@ -72,6 +74,7 @@ const registerUser = asyncHandler( async (req,res) => {
         //so that we can remove the password and refreshToken field from the localPathFile
         "-password -refreshToken"
     )
+    
 
     if (!createdUser) {
         throw new ApiError(500, "Something went wrong while registering the user")
